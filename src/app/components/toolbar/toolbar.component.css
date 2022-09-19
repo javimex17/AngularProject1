@@ -1,0 +1,69 @@
+
+
+
+
+.center_ico_white {
+    color: white;
+    text-decoration: none;
+}
+
+.box_logo {
+    width: 10%;
+    height: 60px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.box_toolbar_center {
+    width: 40%;
+    height: 60px;
+}
+
+.box_toolbar_right {
+    width: 10%;
+    height: 60px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.boxImageCenter{
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+img {
+    width: 30px;
+}
+
+.input_find {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 4px;
+    height: 40px;
+    width:  400px;
+    float: left;
+    background-color: #f7f8f9;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.find {
+    margin-left: 3px;
+    width: 360px;
+    border: 0;
+    background-color: #f7f8f9;
+    outline: none;
+}
+
+.black_button {
+    height: 40px;
+    width: 40px;
+    background-color: #383838;;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
