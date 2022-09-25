@@ -1,16 +1,57 @@
 
-<div class="navbar">
-
-    <div class="nav_button">
-        <span class="font-white pointer">Estudiante 1</span>
+    <div class="navbar">
+        <div class="nav_button">
+            <div class="div_column80">
+                <span class="font-white pointer">ID</span>
+            </div>
+            <div class="div_column80">
+                <span class="font-white pointer"></span>
+            </div>
+            <div class="div_column260">
+                <span class="font-white pointer">Nombre</span>
+            </div>
+            <div class="div_column260">
+                <span class="font-white pointer">Email</span>
+            </div>
+            <div class="div_column80">
+                <span class="font-white pointer">Género</span>
+            </div>
+            <div class="div_column80">
+                <span class="font-white pointer">Grupo</span>
+            </div>
+        </div>    
     </div>
 
-    <div class="nav_button">
-        <span class="font-white pointer">Estudiante 2</span>
-    </div>
+    <div class="navbar" *ngFor="let contact of listContacts">
+        <div class="nav_button">
+            <div class="div_column80">
+                <span class="font-white pointer">{{contact.id}}</span>
+            </div>
 
-    <div class="nav_button">
-        <span class="font-white pointer">Estudiante 3</span>
-    </div>
+            <div class="div_column80">
+                <img class="avatar" src="{{contact.avatar}}"/>
+            </div>
 
-</div>
+            <div class="div_column260">
+                <span class="font-white pointer">{{contact.first_name | uppercase}}</span>
+                <span class="font-white pointer">{{contact.last_name | uppercase}}</span>
+            </div>
+
+            <div class="div_column260">
+                <span class="font-white pointer">{{contact.email}}</span>
+            </div>
+            <div class="div_column80">
+                <a *ngIf="contact.gender == 'M'" href="*" class="material-symbols-outlined center_ico_white">Man</a>
+                <a *ngIf="contact.gender == 'F'" href="*" class="material-symbols-outlined center_ico_white">Woman</a>
+            </div>
+            <div class="div_column80">
+                <span *ngIf="contact.group == 'Junior'" href="*" class="font-white">J</span>
+                <span *ngIf="contact.group == 'Senior'" href="*" class="font-white">S</span>
+            </div>
+
+
+        </div>
+    </div>   
+
+
+    

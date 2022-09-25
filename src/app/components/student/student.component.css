@@ -1,13 +1,11 @@
 
-
 .nav_button {
-    height: 40px;
-    width: 100px;
+    height: 60px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: flex-start;
     padding-left: 40px;
-    margin:0px;
+    margin-left: 2px;
 }
 
 .font-white {
@@ -16,4 +14,27 @@
     font-family: 'Nunito', sans-serif;
     line-height: 1.71;
     letter-spacing: normal;
+    margin-left: 10px;
+}
+
+.div_column80 {
+    min-width: 8%;
+    width: 12px;
+}
+
+.div_column260 {
+    min-width: 18%;
+    width: 25%;
+}
+
+.avatar {
+    vertical-align: middle;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+  }
+
+  .center_ico_white {
+    color: white;
+    text-decoration: none;
 }
