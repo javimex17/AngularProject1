@@ -1,4 +1,4 @@
-
+/*
 .nav_button {
     height: 60px;
     display: flex;
@@ -38,3 +38,13 @@
     color: white;
     text-decoration: none;
 }
+*/
+table {
+    width: 100%;
+  }
+
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  

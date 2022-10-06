@@ -1,57 +1,81 @@
 
-    <div class="navbar">
-        <div class="nav_button">
-            <div class="div_column80">
-                <span class="font-white pointer">ID</span>
-            </div>
-            <div class="div_column80">
-                <span class="font-white pointer"></span>
-            </div>
-            <div class="div_column260">
-                <span class="font-white pointer">Nombre</span>
-            </div>
-            <div class="div_column260">
-                <span class="font-white pointer">Email</span>
-            </div>
-            <div class="div_column80">
-                <span class="font-white pointer">Género</span>
-            </div>
-            <div class="div_column80">
-                <span class="font-white pointer">Grupo</span>
-            </div>
-        </div>    
+
+<p>
+    <mat-toolbar>
+        <mat-icon>book</mat-icon>
+        <button mat-raised-button color="primary" (click)="openDialog()">Añadir</button>
+    </mat-toolbar>
+  </p>
+
+<mat-card>
+
+    <mat-form-field appearance="standard">
+        <mat-label>Filtro</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Filtro" #input autocapitalize="off">
+    </mat-form-field>
+
+    <div class="mat-elevation-z8">
+
+        <table mat-table [dataSource]="dataSource" matSort>
+
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> ID. </th>
+              <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="avatar">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Avatar. </th>
+                <td mat-cell *matCellDef="let element"><img [src]="element.avatar" /></td>
+              </ng-container>
+
+            <ng-container matColumnDef="first_name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+              <td mat-cell *matCellDef="let element"> {{element.first_name}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+              <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="group">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Grupo </th>
+              <td mat-cell *matCellDef="let element"> {{element.group}} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="gender">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Género </th>
+                <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+            </ng-container>
+    
+    
+            <ng-container matColumnDef="actions_edit">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element">  
+                    <a class="pointer" matTooltip="Editar">
+                        <mat-icon>edit</mat-icon>
+                    </a>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions_delete">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element; let i = index">  
+                    <a class="pointer" (click)="deleteStudent(i)" matTooltip="Borrar">
+                        <mat-icon>delete</mat-icon>
+                    </a>
+                </td>
+            </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+    
+          <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    
     </div>
 
-    <div class="navbar" *ngFor="let contact of listContacts">
-        <div class="nav_button">
-            <div class="div_column80">
-                <span class="font-white pointer">{{contact.id}}</span>
-            </div>
-
-            <div class="div_column80">
-                <img class="avatar" src="{{contact.avatar}}"/>
-            </div>
-
-            <div class="div_column260">
-                <span class="font-white pointer">{{contact.first_name | uppercase}}</span>
-                <span class="font-white pointer">{{contact.last_name | uppercase}}</span>
-            </div>
-
-            <div class="div_column260">
-                <span class="font-white pointer">{{contact.email}}</span>
-            </div>
-            <div class="div_column80">
-                <a *ngIf="contact.gender == 'M'" href="*" class="material-symbols-outlined center_ico_white">Man</a>
-                <a *ngIf="contact.gender == 'F'" href="*" class="material-symbols-outlined center_ico_white">Woman</a>
-            </div>
-            <div class="div_column80">
-                <span *ngIf="contact.group == 'Junior'" href="*" class="font-white">J</span>
-                <span *ngIf="contact.group == 'Senior'" href="*" class="font-white">S</span>
-            </div>
+   
+</mat-card>
 
 
-        </div>
-    </div>   
-
-
-    

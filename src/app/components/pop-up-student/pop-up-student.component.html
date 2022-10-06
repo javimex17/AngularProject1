@@ -1,0 +1,59 @@
+
+<h2 mat-dialog-title>Crear Estudiante</h2>
+
+<mat-dialog-content class="mat-typography">
+    
+<mat-card style="margin-top: 10px; width: 350px">
+
+    <form [formGroup]="form" (ngSubmit)="addStudent()">
+
+                <mat-form-field appearance="fill" style="width: 300px">
+                    <mat-label>ID</mat-label>
+                    <input matInput autocomplete="off" formControlName="id">
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" style="width: 300px">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput autocomplete="off" formControlName="first_name">
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" style="width: 300px">
+                    <mat-label>Apellidos</mat-label>
+                    <input matInput autocomplete="off" formControlName="last_name">
+                </mat-form-field>        
+
+                <mat-form-field appearance="fill" style="width: 300px">
+                    <mat-label>Email</mat-label>
+                    <input matInput autocomplete="off" formControlName="email">
+                </mat-form-field> 
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Grupo</mat-label>
+                    <mat-select formControlName="group">
+                      <mat-option *ngFor="let group of groups" [value]="group.value">
+                        {{group.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Género</mat-label>
+                    <mat-select formControlName="gender">
+                      <mat-option *ngFor="let gender of genders" [value]="gender.value">
+                        {{gender.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                </mat-form-field>
+        <br>
+        <br>
+    
+    <mat-dialog-actions align="end">
+        <button type="submit" [disabled]="form.invalid" mat-button mat-dialog-close>Aceptar</button>
+        <button mat-button mat-dialog-close>Cancelar</button> 
+    </mat-dialog-actions>
+
+    </form>
+
+</mat-card>
+
+</mat-dialog-content>

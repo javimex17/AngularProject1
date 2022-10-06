@@ -6,5 +6,4 @@ export interface IContact {
     avatar: string;
     group: string;
     gender: string;
-
 }

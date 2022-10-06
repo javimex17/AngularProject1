@@ -27,7 +27,14 @@ export class ContactService {
     else {
       return;
     }
-
   } 
+
+  deleteContact ( index: number) {
+    LIST_CONTACT.splice (index, 1);
+  }
+
+  addContact (contact: IContact) {
+    LIST_CONTACT.unshift (contact);
+  }
 
 }
