@@ -10,21 +10,33 @@
                 <mat-form-field appearance="fill" style="width: 300px">
                     <mat-label>ID</mat-label>
                     <input matInput autocomplete="off" formControlName="id">
+                    <mat-error *ngIf="this.form.controls.id.hasError('required')">
+                        Este campo es requerido
+                    </mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="fill" style="width: 300px">
                     <mat-label>Nombre</mat-label>
                     <input matInput autocomplete="off" formControlName="first_name">
+                    <mat-error *ngIf="this.form.controls.first_name.hasError('required')">
+                        Este campo es requerido
+                    </mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="fill" style="width: 300px">
                     <mat-label>Apellidos</mat-label>
                     <input matInput autocomplete="off" formControlName="last_name">
+                    <mat-error *ngIf="this.form.controls.last_name.hasError('required')">
+                        Este campo es requerido
+                    </mat-error>
                 </mat-form-field>        
 
                 <mat-form-field appearance="fill" style="width: 300px">
                     <mat-label>Email</mat-label>
                     <input matInput autocomplete="off" formControlName="email">
+                    <mat-error *ngIf="this.form.controls.email.hasError('required')">
+                        Este campo es requerido
+                    </mat-error>
                 </mat-form-field> 
 
                 <mat-form-field appearance="fill">
@@ -34,6 +46,9 @@
                         {{group.viewValue}}
                       </mat-option>
                     </mat-select>
+                    <mat-error *ngIf="this.form.controls.group.hasError('required')">
+                        Este campo es requerido
+                    </mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="fill">
@@ -43,16 +58,18 @@
                         {{gender.viewValue}}
                       </mat-option>
                     </mat-select>
+                    <mat-error *ngIf="this.form.controls.group.hasError('required')">
+                        Este campo es requerido
+                    </mat-error>
                 </mat-form-field>
         <br>
         <br>
-    
+
     <mat-dialog-actions align="end">
         <button type="submit" [disabled]="form.invalid" mat-button mat-dialog-close>Aceptar</button>
         <button mat-button mat-dialog-close>Cancelar</button> 
     </mat-dialog-actions>
-
-    </form>
+</form>
 
 </mat-card>
 
