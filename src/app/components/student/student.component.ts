@@ -16,8 +16,6 @@ import { PopUpStudentComponent } from '../pop-up-student/pop-up-student.componen
 
 //  <button mat-raised-button>Basic</button>
 
-
-
 export class StudentComponent implements OnInit {
 
   //ELEMENT_DATA: IContact[] = [];
@@ -29,7 +27,6 @@ export class StudentComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private contactService : ContactService, private dialogRef: MatDialog) { 
-
 
 
   }
@@ -44,6 +41,16 @@ export class StudentComponent implements OnInit {
       this.ngAfterViewInit();
     });
   }
+
+  editDialog (row: any){
+    this.dialogRef.open (PopUpStudentComponent,
+      {
+        data: row
+      }
+      
+      )
+
+  } 
 
   ngAfterViewInit () {
     this.dataSource.paginator = this.paginator;

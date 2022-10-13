@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { throwToolbarMixedModesError } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
+  //public componentStd : number = 0;
+
+  @Output() messageEvent = new EventEmitter<number>()
+  @Input() componentStd : number = 0;
+
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  changeComponent (index: number) {
+      this.messageEvent.emit (index)
+
   }
 
 }

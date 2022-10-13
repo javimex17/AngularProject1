@@ -26,6 +26,10 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProjectStudentsComponent } from './components/project-students/project-students.component';
+import { GroupComponent } from './components/group/group.component';
+import { ClassGroupComponent } from './components/class-group/class-group.component';
+import { PopUpGroupComponent } from './components/pop-up-group/pop-up-group.component';
+import { PopUpClassGroupComponent } from './components/pop-up-class-group/pop-up-class-group.component';
 
 
 @NgModule({
@@ -35,7 +39,11 @@ import { ProjectStudentsComponent } from './components/project-students/project-
     ToolbarComponent,
     StudentComponent,
     PopUpStudentComponent,
-    ProjectStudentsComponent
+    ProjectStudentsComponent,
+    GroupComponent,
+    ClassGroupComponent,
+    PopUpGroupComponent,
+    PopUpClassGroupComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-project-students',
@@ -7,14 +7,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectStudentsComponent implements OnInit {
 
+  @Input()  componentResponse : number = 0;
+
   constructor() { }
 
   ngOnInit(): void {
-  }
 
+  
+  }
 
   addGrid($event: any) {
-
     alert ('componente event')
   }
+
+  receiveComponent($event: number) {
+
+   return this.componentResponse = $event;
+
+    
+  }
+
 }

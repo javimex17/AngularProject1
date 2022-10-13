@@ -1,0 +1,38 @@
+
+<h2 mat-dialog-title>Crear Curso</h2>
+
+<mat-dialog-content class="mat-typography">
+    
+<mat-card style="margin-top: 10px; width: 350px">
+
+    <form [formGroup]="form" (ngSubmit)="addGroup()">
+
+                <mat-form-field appearance="fill" style="width: 300px">
+                    <mat-label>ID</mat-label>
+                    <input matInput autocomplete="off" formControlName="id">
+                    <mat-error *ngIf="this.form.controls.id.hasError('required')">
+                        Este campo es requerido
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" style="width: 300px">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput autocomplete="off" formControlName="name">
+                    <mat-error *ngIf="this.form.controls.name.hasError('required')">
+                        Este campo es requerido
+                    </mat-error>
+                </mat-form-field>
+
+            <br>
+            <br>
+
+        <mat-dialog-actions align="end">
+            <button type="submit" [disabled]="form.invalid" mat-button mat-dialog-close>Aceptar</button>
+            <button mat-button mat-dialog-close>Cancelar</button>
+        </mat-dialog-actions>
+
+    </form>
+
+</mat-card>
+
+</mat-dialog-content>

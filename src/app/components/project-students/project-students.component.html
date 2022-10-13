@@ -1,7 +1,23 @@
 <div class="grid-container">
 
+
+    <span class="font-white pointer">{{componentResponse}}</span>
+    
     <app-toolbar class="grid-header"></app-toolbar>
-    <app-navbar class="grid-menu"></app-navbar>
-    <app-student class="grid-students" (addStudentInGrid)="addGrid($event)"></app-student>
-  
+
+    <app-navbar class="grid-menu" (messageEvent)="componentResponse = receiveComponent($event)"></app-navbar>
+
+
+    <div class="grid-students">
+
+        <app-student *ngIf="componentResponse==1" (addStudentInGrid)="addGrid($event)"></app-student>
+
+        <app-group *ngIf="componentResponse==2" (addStudentInGrid)="addGrid($event)"></app-group>
+
+        <app-class-group *ngIf="componentResponse==3" (addStudentInGrid)="addGrid($event)"></app-class-group>
+        
+    </div>
+
+
+
 </div>
