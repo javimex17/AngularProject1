@@ -13,6 +13,8 @@
         <app-student *ngIf="componentResponse==1" (addStudentInGrid)="addGrid($event)"></app-student>
 
         <app-group *ngIf="componentResponse==2" (addStudentInGrid)="addGrid($event)"></app-group>
+        <app-table-group *ngIf="componentResponse==2"></app-table-group>
+
 
         <app-class-group *ngIf="componentResponse==3" (addStudentInGrid)="addGrid($event)"></app-class-group>
         

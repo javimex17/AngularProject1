@@ -30,6 +30,11 @@ import { GroupComponent } from './components/group/group.component';
 import { ClassGroupComponent } from './components/class-group/class-group.component';
 import { PopUpGroupComponent } from './components/pop-up-group/pop-up-group.component';
 import { PopUpClassGroupComponent } from './components/pop-up-class-group/pop-up-class-group.component';
+import { FilterNamePipe } from './pipes/filter-name.pipe';
+import { TableGroupComponent } from './components/table-group/table-group.component';
+import { CardsGroupComponent } from './components/cards-group/cards-group.component';
+import { BoolenToTextPipe } from './pipes/boolen-to-text.pipe';
+import { CategoryPipePipe } from './pipes/category-pipe.pipe';
 
 
 @NgModule({
@@ -43,7 +48,12 @@ import { PopUpClassGroupComponent } from './components/pop-up-class-group/pop-up
     GroupComponent,
     ClassGroupComponent,
     PopUpGroupComponent,
-    PopUpClassGroupComponent
+    PopUpClassGroupComponent,
+    FilterNamePipe,
+    TableGroupComponent,
+    CardsGroupComponent,
+    BoolenToTextPipe,
+    CategoryPipePipe
   ],
   imports: [
     BrowserModule,

@@ -25,6 +25,7 @@ export class StudentComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  criteria = '';
 
   constructor(private contactService : ContactService, private dialogRef: MatDialog) { 
 
