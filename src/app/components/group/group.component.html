@@ -3,7 +3,7 @@
 <p>
     <mat-toolbar>
         <mat-icon>book</mat-icon>
-        <button mat-raised-button color="primary" (click)="openDialog()">Añadir</button>
+        <button mat-raised-button color="primary">Añadir</button>
     </mat-toolbar>
   </p>
 
@@ -11,7 +11,7 @@
 
     <mat-form-field appearance="standard">
         <mat-label>Filtro</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Filtro" #input autocapitalize="off">
+        <input matInput placeholder="Filtro" #input autocapitalize="off">
     </mat-form-field>
 
     <div class="mat-elevation-z8">
@@ -23,8 +23,8 @@
               <td mat-cell *matCellDef="let element"> {{element.id}} </td>
             </ng-container>
 
-           
-    
+
+
             <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> NAME. </th>
                 <td mat-cell *matCellDef="let element"> {{element.name}} </td>
@@ -32,7 +32,7 @@
 
             <ng-container matColumnDef="actions_edit">
                 <th mat-header-cell *matHeaderCellDef></th>
-                <td mat-cell *matCellDef="let element">  
+                <td mat-cell *matCellDef="let element">
                     <a class="pointer" (click)="editDialog(element)" matTooltip="Editar">
                         <mat-icon>edit</mat-icon>
                     </a>
@@ -41,22 +41,22 @@
 
             <ng-container matColumnDef="actions_delete">
                 <th mat-header-cell *matHeaderCellDef></th>
-                <td mat-cell *matCellDef="let element; let i = index">  
-                    <a class="pointer" (click)="deleteGroup(i)" matTooltip="Borrar">
+                <td mat-cell *matCellDef="let element; let i = index">
+                    <a class="pointer" matTooltip="Borrar">
                         <mat-icon>delete</mat-icon>
                     </a>
                 </td>
             </ng-container>
-          
+
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
-    
+
           <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
-    
+
     </div>
 
-   
+
 </mat-card>
 
 
