@@ -1,10 +1,15 @@
 <p>
     <mat-toolbar>
-        <mat-icon>book</mat-icon>
+        <mat-icon>assessment</mat-icon>
     </mat-toolbar>
 </p>
 
-<mat-form-field>
-    <mat-label>Filtrar por nombre del curso</mat-label>
-    <input type="text" matInput (keyUp)="filtrarCurso()">
-</mat-form-field>
+<div *ngFor="let element of ELEMENT_DATA">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>{{element.id}}</mat-card-title>
+            <mat-card-subtitle>{{element.name}}</mat-card-subtitle>
+        </mat-card-header>
+    </mat-card>
+    <br>
+</div>

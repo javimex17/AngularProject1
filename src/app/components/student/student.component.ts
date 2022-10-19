@@ -6,8 +6,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { PopUpStudentComponent } from '../pop-up-student/pop-up-student.component';
+import { from, interval, Observable, of } from 'rxjs';
 
-
+import { map, mergeMap } from 'rxjs/operators';
 @Component({
   selector: 'app-student',
   templateUrl: './student.component.html',
@@ -27,13 +28,35 @@ export class StudentComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   criteria = '';
 
+  counterObservable = interval (1000);
+  counterSub : any;
+  counter : number = 0;
+
   constructor(private contactService : ContactService, private dialogRef: MatDialog) { 
-
-
   }
   //dataSource = this.contactService.getContacts ();
 
   ngOnInit(): void {
+
+    this.counterSub = this.counterObservable.subscribe ((value) => {
+      this.counter = value;
+    })
+
+    of (this.ELEMENT_DATA)
+      interval (2000).pipe (
+        map( (i) => i)
+      ).subscribe()
+
+      of (this.ELEMENT_DATA)
+      mergeMap(
+        (ELEMENT_DATA: IContact[]) => from (this.ELEMENT_DATA).pipe(
+          map (
+            (curso: IContact) => ELEMENT_DATA.filter (c => c.first_name === curso.first_name)
+          )
+        )
+      )
+      
+
   }
 
   openDialog () {
@@ -50,7 +73,6 @@ export class StudentComponent implements OnInit {
       }
       
       )
-
   } 
 
   ngAfterViewInit () {
@@ -70,6 +92,20 @@ export class StudentComponent implements OnInit {
 
   addGrid ($event: any): void {
     this.ngAfterViewInit();
+  }
+
+  lengthStudent () : number {
+    return this.contactService.lengthContact ();
+  }
+
+  totalStudents = new Promise ((resolve, reject) => {
+    setTimeout( () => {
+      resolve (this.contactService.lengthContact());
+    }, 2000);
+  });
+
+  unsubscribe () {
+    this.counterSub.unsubscribe ();
   }
 
 }

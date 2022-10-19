@@ -77,7 +77,16 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
-    
+          <tr>
+            <mat-toolbar>
+              <mat-label>Total estudiantes: TimePromise 2 seconds ( {{totalStudents | async}} )</mat-label>
+            </mat-toolbar>
+            <mat-toolbar>
+              <mat-label>Tiempo para que termine la oferta ( {{counter}} )</mat-label>
+              <button mat-raised-button color="primary" (click)="unsubscribe()">Subscripción hecha</button>
+            </mat-toolbar>
+
+          </tr>
           <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
     
     </div>

@@ -37,6 +37,10 @@ export class ContactService {
     LIST_CONTACT.unshift (contact);
   }
 
+  lengthContact () : number {
+    return LIST_CONTACT.length;
+  }
+
   editContact (contact: IContact) {
     let Index = LIST_CONTACT.findIndex ( (list=> list.id == contact.id)  );
     LIST_CONTACT[Index].id = contact.id;
