@@ -1,13 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { StudentComponent } from './components/student/student.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
@@ -18,7 +16,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule} from '@angular/material/paginator';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
-
 import { MatSortModule } from '@angular/material/sort';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PopUpStudentComponent } from './components/pop-up-student/pop-up-student.component';
@@ -35,7 +32,12 @@ import { TableGroupComponent } from './components/table-group/table-group.compon
 import { CardsGroupComponent } from './components/cards-group/cards-group.component';
 import { BoolenToTextPipe } from './pipes/boolen-to-text.pipe';
 import { CategoryPipePipe } from './pipes/category-pipe.pipe';
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatNativeDateModule } from '@angular/material/core';
+import { AutenticationModule } from './autentication/autentication.module';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { GroupObsModule } from './group-obs/group-obs.module';
 
 @NgModule({
   declarations: [
@@ -53,9 +55,12 @@ import { CategoryPipePipe } from './pipes/category-pipe.pipe';
     TableGroupComponent,
     CardsGroupComponent,
     BoolenToTextPipe,
-    CategoryPipePipe
+    CategoryPipePipe,
+    PageNotFoundComponent
   ],
   imports: [
+    AutenticationModule,
+    GroupObsModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -74,7 +79,10 @@ import { CategoryPipePipe } from './pipes/category-pipe.pipe';
     MatButtonModule,
     MatSelectModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatSlideToggleModule,
+    MatNativeDateModule
   ],
   exports: [
     MatProgressBarModule,
@@ -90,7 +98,10 @@ import { CategoryPipePipe } from './pipes/category-pipe.pipe';
     MatButtonModule,
     MatSelectModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatSlideToggleModule,
+    MatNativeDateModule
   ],
   providers: [],
   bootstrap: [AppComponent]

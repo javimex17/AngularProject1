@@ -5,7 +5,7 @@
         <mat-icon>book</mat-icon>
         <button mat-raised-button color="primary" (click)="openDialog()">Añadir</button>
     </mat-toolbar>
-  </p>
+</p>
 
 <mat-card>
 
@@ -23,11 +23,30 @@
               <td mat-cell *matCellDef="let element"> {{element.id}} </td>
             </ng-container>
 
-           
-    
             <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> NAME. </th>
                 <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="profesor">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>PROFESOR</th>
+                <td mat-cell *matCellDef="let element"> {{element.profesor}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="fechaInicio">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>FECHA INICIO</th>
+                <td mat-cell *matCellDef="let element"> {{element.fechaInicio  | date}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="fechaFin">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>FECHA FIN</th>
+                <td mat-cell *matCellDef="let element"> {{element.fechaFin | date}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="inscripcion">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>INSCRIPCION</th>
+                <td mat-cell *matCellDef="let element"> {{element.inscripcion}} </td>
             </ng-container>
 
             <ng-container matColumnDef="actions_edit">
@@ -50,7 +69,7 @@
           
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
+        </table>
     
           <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
     

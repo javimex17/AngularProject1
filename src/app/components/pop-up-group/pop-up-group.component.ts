@@ -19,6 +19,10 @@ export class PopUpGroupComponent implements OnInit {
   form = this.fb.group ({
     id: ['', [Validators.required, Validators.min(0)]],
     name: ['', [Validators.required]],
+    profesor: ['', [Validators.required]],
+    fechaInicio: [''],
+    fechaFin: [''],
+    inscripcion: ['']
    });
 
 
@@ -35,6 +39,10 @@ export class PopUpGroupComponent implements OnInit {
 
         this.form.controls ['id'].setValue (this.editData.id)
         this.form.controls ['name'].setValue (this.editData.name)
+        this.form.controls ['profesor'].setValue (this.editData.profesor)
+        this.form.controls ['fechaInicio'].setValue (this.editData.fechaInicio)
+        this.form.controls ['fechaFin'].setValue (this.editData.fechaFin)
+        this.form.controls ['inscripcion'].setValue (this.editData.inscripcion)
     }
 
   }
@@ -43,7 +51,11 @@ export class PopUpGroupComponent implements OnInit {
   
     const group: IGroup = {
       id: this.form.value.id,
-      name: this.form.value.name
+      name: this.form.value.name,
+      profesor: this.form.value.profesor,
+      fechaInicio: this.form.value.fechaInicio,
+      fechaFin: this.form.value.fechaFin,
+      inscripcion: this.form.value.inscripcion
     }
 
     if (this.editData) {
@@ -57,7 +69,7 @@ export class PopUpGroupComponent implements OnInit {
   }
 
   validateNumber(): ValidatorFn {
-    return (control: AbstractControl): {[key: string]:any} | null => {
+      return (control: AbstractControl): {[key: string]:any} | null => {
       return (Number.isInteger ( parseInt (control.value))) ? null : { errorEdad: true }
 
     }

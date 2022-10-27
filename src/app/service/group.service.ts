@@ -10,32 +10,34 @@ import { IGroup } from '../models/group.interface';
 export class GroupService {
   private groupSubject: BehaviorSubject<IGroup[]>;
 
-
   constructor() { 
     this.groupSubject = new BehaviorSubject<IGroup[]>(LIST_GROUP)
   }
 
-
   // Nos devuelve un listado 
-  getGroups (): Observable<IGroup[]> {
-    return this.groupSubject.asObservable();
+  getGroups (): IGroup[] {
+    return LIST_GROUP;
   }
 
   // Nos registro un Contacto a partir de su ID
-  getGroupID (id: number) : Observable<IGroup[]>{
-    return this.getGroups().pipe (
-      map((LIST_GROUP: IGroup[]) => LIST_GROUP.filter((group: IGroup) => group.id === id))
-      )
+  getGroupID (id: number) : IGroup | undefined{
+    
+    const contact  = LIST_GROUP.find ((contact: IGroup) => contact.id == id );
+
+    if ( contact ) {
+      return contact;
+    }
+    else {
+      return;
+    }
   } 
 
   deleteGroup ( index: number) {
     LIST_GROUP.splice (index, 1);
-    this.groupSubject.next (LIST_GROUP)
   }
 
   addGroup (contact: IGroup) {
     LIST_GROUP.unshift (contact);
-    this.groupSubject.next (LIST_GROUP)
   }
 
   editGroup (contact: IGroup) {
@@ -46,7 +48,6 @@ export class GroupService {
     LIST_GROUP[Index].fechaFin = contact.fechaFin;
     LIST_GROUP[Index].inscripcion = contact.inscripcion;
     LIST_GROUP[Index].profesor = contact.profesor;
-    this.groupSubject.next (LIST_GROUP)
   }
 
 }

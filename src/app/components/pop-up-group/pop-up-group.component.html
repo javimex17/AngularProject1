@@ -23,6 +23,34 @@
                     </mat-error>
                 </mat-form-field>
 
+                <mat-form-field appearance="fill" style="width: 300px">
+                    <mat-label>profesor</mat-label>
+                    <input matInput autocomplete="off" formControlName="profesor">
+                    <mat-error *ngIf="this.form.controls.name.hasError('required')">
+                        Este campo es requerido
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Fecha Inicio</mat-label>
+                    <input matInput [matDatepicker]="fechaInicio">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="fechaInicio"></mat-datepicker-toggle>
+                    <mat-datepicker #fechaInicio></mat-datepicker>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="fill">
+                    <mat-label>Fecha Fin</mat-label>
+                    <input matInput [matDatepicker]="fechaFin">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="fechaFin"></mat-datepicker-toggle>
+                    <mat-datepicker #fechaFin></mat-datepicker>
+                  </mat-form-field>
+                
+ 
+                <mat-slide-toggle formControlName="inscripcion">Inscripcion abierta</mat-slide-toggle>
+
+
             <br>
             <br>
 
