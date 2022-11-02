@@ -1,14 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ContactService } from '../../service/contact.service';
-import { IContact } from '../../models/contact.interface';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { StudentService } from '../../service/student.service';
+import { IStudent } from '../../models/student.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { PopUpStudentComponent } from '../pop-up-student/pop-up-student.component';
 import { from, interval, Observable, of } from 'rxjs';
-
 import { map, mergeMap } from 'rxjs/operators';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 @Component({
   selector: 'app-student',
   templateUrl: './student.component.html',
@@ -19,8 +18,7 @@ import { map, mergeMap } from 'rxjs/operators';
 
 export class StudentComponent implements OnInit {
 
-  //ELEMENT_DATA: IContact[] = [];
-  ELEMENT_DATA = this.contactService.getContacts ();
+  ELEMENT_DATA = this.studentService.getStudents ();
   displayedColumns: string[] = ['id', 'avatar', 'first_name', 'email', 'group', 'gender', 'actions_edit', 'actions_delete'];
   dataSource = new MatTableDataSource (this.ELEMENT_DATA);
 
@@ -32,7 +30,7 @@ export class StudentComponent implements OnInit {
   counterSub : any;
   counter : number = 0;
 
-  constructor(private contactService : ContactService, private dialogRef: MatDialog) { 
+  constructor(private studentService : StudentService, private dialogRef: MatDialog) { 
   }
   //dataSource = this.contactService.getContacts ();
 
@@ -49,14 +47,12 @@ export class StudentComponent implements OnInit {
 
       of (this.ELEMENT_DATA)
       mergeMap(
-        (ELEMENT_DATA: IContact[]) => from (this.ELEMENT_DATA).pipe(
+        (ELEMENT_DATA: IStudent[]) => from (this.ELEMENT_DATA).pipe(
           map (
-            (curso: IContact) => ELEMENT_DATA.filter (c => c.first_name === curso.first_name)
+            (curso: IStudent) => ELEMENT_DATA.filter (c => c.first_name === curso.first_name)
           )
         )
       )
-      
-
   }
 
   openDialog () {
@@ -70,9 +66,7 @@ export class StudentComponent implements OnInit {
     this.dialogRef.open (PopUpStudentComponent,
       {
         data: row
-      }
-      
-      )
+      })
   } 
 
   ngAfterViewInit () {
@@ -86,7 +80,7 @@ export class StudentComponent implements OnInit {
   }
 
   deleteStudent (index: number) {
-    this.contactService.deleteContact(index);
+    this.studentService.deleteStudent(index);
     this.ngAfterViewInit();
   }
 
@@ -95,12 +89,12 @@ export class StudentComponent implements OnInit {
   }
 
   lengthStudent () : number {
-    return this.contactService.lengthContact ();
+    return this.studentService.lengthContact ();
   }
 
   totalStudents = new Promise ((resolve, reject) => {
     setTimeout( () => {
-      resolve (this.contactService.lengthContact());
+      resolve (this.studentService.lengthContact());
     }, 2000);
   });
 

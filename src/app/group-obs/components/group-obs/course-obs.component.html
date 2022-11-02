@@ -1,0 +1,26 @@
+
+
+
+<div *ngFor="let group of group$ | async" >
+    
+    <br>
+
+    
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>{{ group.id }}</mat-card-title>
+            <mat-card-subtitle>{{ group.name }}</mat-card-subtitle>
+        </mat-card-header>
+
+
+        <mat-card-content>
+            <p>Impartido por {{ group.profesor }}</p>
+
+        </mat-card-content>
+
+    </mat-card>
+
+    
+
+</div>
+

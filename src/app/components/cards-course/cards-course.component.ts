@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { CourseService } from 'src/app/service/course.service';
 
 @Component({
-  selector: 'app-table-group',
-  templateUrl: './table-group.component.html',
-  styleUrls: ['./table-group.component.css']
+  selector: 'app-cards-course',
+  templateUrl: './cards-course.component.html',
+  styleUrls: ['./cards-course.component.css']
 })
-export class TableGroupComponent implements OnInit {
+export class CardsCourseComponent implements OnInit {
 
 
   ELEMENT_DATA = this.courseService.getCourse ();
@@ -16,10 +16,5 @@ export class TableGroupComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  filtrarCurso () {
-    
-  }
-
 
 }

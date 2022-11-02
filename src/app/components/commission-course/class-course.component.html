@@ -1,0 +1,121 @@
+
+
+<p>
+    <mat-toolbar>
+        <mat-icon>book</mat-icon>
+        <button mat-raised-button color="primary" (click)="openDialog()">Añadir</button>
+    </mat-toolbar>
+</p>
+
+<mat-card>
+
+    <mat-form-field appearance="standard">
+        <mat-label>Filtro</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Filtro" #input autocapitalize="off">
+    </mat-form-field>
+
+    <div class="mat-elevation-z8">
+
+        <table mat-table [dataSource]="dataSource" matSort>
+
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> ID. </th>
+              <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> NAME. </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="fechaInicio">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> FECHA INICIO. </th>
+                <td mat-cell *matCellDef="let element"> {{element.fechaInicio  | date}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="fechaFin">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> FECHA FIN. </th>
+                <td mat-cell *matCellDef="let element"> {{element.fechaFin | date}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions_edit">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element">  
+                    <a class="pointer" (click)="editDialog(element)" matTooltip="Editar">
+                        <mat-icon>edit</mat-icon>
+                    </a>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions_delete">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element; let i = index">  
+                    <a class="pointer" (click)="deleteClassGroup(i)" matTooltip="Borrar">
+                        <mat-icon>delete</mat-icon>
+                    </a>
+                </td>
+            </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+    
+          <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    
+    </div>
+
+</mat-card>
+
+
+
+
+
+
+
+<br>
+
+<mat-card>
+
+        <mat-accordion class="headers-align" multi *ngFor=" let item of ELEMENT_DATA">
+            <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{item.name}}
+                </mat-panel-title>
+                <mat-panel-description>
+                Profesor {{item.idCourse?.profesor!}}
+                <mat-icon>assignment</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+        
+                <tr *ngFor=" let item of item.subscriptions">
+                    <mat-card class="card100">
+                        <img [src]="item.avatar">
+                        <table>
+                            <tr>
+                                <td>
+                                    <mat-label>{{item.first_name+' '+item.last_name}}</mat-label>
+                                </td>
+                                <td>
+                                    <mat-label>{{item.email}}</mat-label>
+                                </td>
+                                <td>
+                                    <mat-label>{{item.email}}</mat-label>
+                                </td>
+                                <td>
+                                    <mat-label>{{item.gender}}</mat-label>
+                                </td>
+                                <td>
+                                    <mat-label>{{item.group}}</mat-label>
+                                </td>
+                            </tr>
+
+                        </table>
+                    </mat-card>
+                 </tr>
+        
+            </mat-expansion-panel>
+        </mat-accordion>
+        <br>
+  
+</mat-card>

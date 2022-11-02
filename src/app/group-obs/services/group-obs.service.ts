@@ -1,26 +1,26 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { LIST_GROUP } from 'src/app/mock/group.mock';
-import { IGroup } from '../../models/group.interface';
+import { LIST_COURSE } from 'src/app/mock/course.mock';
+import { ICourse } from '../../models/course.interface';
 
 
 @Injectable()
 
-export class GroupObsService {
-  private groupSubject: BehaviorSubject<IGroup[]>;
+export class CourseObsService {
+  private courseSubject: BehaviorSubject<ICourse[]>;
 
   constructor() { 
-    this.groupSubject = new BehaviorSubject<IGroup[]>(LIST_GROUP)
+    this.courseSubject = new BehaviorSubject<ICourse[]>(LIST_COURSE)
   }
 
-  getGroups(): Observable<IGroup[]>{
-    return this.groupSubject.asObservable();
+  getCourses(): Observable<ICourse[]>{
+    return this.courseSubject.asObservable();
   }
 
-  getGroupId(id: number) : Observable<IGroup[]> {
-    return this.getGroups().pipe(
-      map((cursos: IGroup[]) => cursos.filter((curso: IGroup) => curso.id === id))
+  getGroupId(id: number) : Observable<ICourse[]> {
+    return this.getCourses().pipe(
+      map((cursos: ICourse[]) => cursos.filter((curso: ICourse) => curso.id === id))
     )
   }
 

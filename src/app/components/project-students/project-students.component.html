@@ -10,14 +10,21 @@
 
     <div class="grid-students">
 
+            
+
+        <router-outlet></router-outlet>
+
+        <!--
+
         <app-student *ngIf="componentResponse==1" (addStudentInGrid)="addGrid($event)"></app-student>
 
-        <app-group *ngIf="componentResponse==2" (addStudentInGrid)="addGrid($event)"></app-group>
+        <app-course *ngIf="componentResponse==2" (addStudentInGrid)="addGrid($event)"></app-course>
         <app-table-group *ngIf="componentResponse==2"></app-table-group>
-
-
-        <app-class-group *ngIf="componentResponse==3" (addStudentInGrid)="addGrid($event)"></app-class-group>
         
+        <app-class-course *ngIf="componentResponse==3" (addStudentInGrid)="addGrid($event)"></app-class-course>
+        
+        -->
+
     </div>
 
 

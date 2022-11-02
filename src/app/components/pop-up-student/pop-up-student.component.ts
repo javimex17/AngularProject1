@@ -1,9 +1,9 @@
 import { Component, OnInit, Output, EventEmitter, Inject } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, ValidatorFn, Validators } from '@angular/forms';
-import { ContactService } from 'src/app/service/contact.service';
+import { StudentService } from 'src/app/service/student.service';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
-import { IContact } from '../../models/contact.interface';
+import { IStudent } from '../../models/student.interface';
 
 @Component({
   selector: 'app-pop-up-student',
@@ -31,7 +31,7 @@ export class PopUpStudentComponent implements OnInit {
   id: ['', [Validators.required, Validators.min(0)]],
   first_name: ['', [Validators.required]],
   last_name: ['', [Validators.required]],
-  email: ['', [Validators.required], [Validators.email]],
+  email: ['', [Validators.required,Validators.email]],
   gender: ['', [Validators.required]],
   group: ['', [Validators.required]]
  });
@@ -39,7 +39,7 @@ export class PopUpStudentComponent implements OnInit {
  
 
   constructor(private fb: FormBuilder, 
-              private contactService : ContactService,
+              private studentService : StudentService,
               @Inject (MAT_DIALOG_DATA) public editData: any,
               private dialogRef : MatDialogRef<PopUpStudentComponent>) { 
 
@@ -52,17 +52,20 @@ export class PopUpStudentComponent implements OnInit {
 
         this.actionBtn = 'Update',
 
-          this.form.controls ['id'].setValue (this.editData.id)
-          this.form.controls ['first_name'].setValue (this.editData.first_name)
-          this.form.controls ['last_name'].setValue (this.editData.last_name)
-          this.form.controls ['email'].setValue (this.editData.email)
+        console.log("this.editData",this.editData);
+          this.form.controls ['id'].setValue (this.editData.id);
+          this.form.controls ['first_name'].setValue (this.editData.first_name);
+          this.form.controls ['last_name'].setValue (this.editData.last_name);
+          this.form.controls ['email'].setValue (this.editData.email);
+          this.form.controls ['gender'].setValue (this.editData.gender);
+          this.form.controls ['group'].setValue (this.editData.group);
       }
 
   }
 
   addStudent():void {
   
-    const student: IContact = {
+    const student: IStudent = {
       id: this.form.value.id,
       first_name: this.form.value.first_name,
       last_name: this.form.value.last_name,
@@ -72,10 +75,10 @@ export class PopUpStudentComponent implements OnInit {
       group: this.form.value.group,
     }
    if (this.editData) {
-    this.contactService.editContact(student);
+    this.studentService.editStudent(student);
    }
     else {
-    this.contactService.addContact(student);
+    this.studentService.addStudent(student);
     this.addStudentInGrid.emit (this.form.value);
   }
 

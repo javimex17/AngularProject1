@@ -1,11 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ProjectStudentsComponent } from './components/project-students/project-students.component';
+import { CommissionCourseComponent } from './components/commission-course/class-course.component';
+import { CourseComponent } from './components/course/course.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { StudentComponent } from './components/student/student.component';
 
 const routes: Routes = [
-  { path: 'inicio', component: ProjectStudentsComponent },
-  { path: '', redirectTo: 'inicio', pathMatch: 'full'},
+  { path: 'students', component: StudentComponent },
+  { path: 'courses', component: CourseComponent },
+  { path: 'commission', component: CommissionCourseComponent },
+
+  { path: '', redirectTo: 'students', pathMatch: 'full'},
   { path: '**', component: PageNotFoundComponent }
 
 ];
