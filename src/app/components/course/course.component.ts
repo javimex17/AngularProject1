@@ -7,6 +7,8 @@ import { MatTableDataSource } from '@angular/material/table';
 
 import { CourseService } from 'src/app/service/course.service';
 import { PopUpCourse } from '../pop-up-course/pop-up-course.component';
+import { ICourse } from '../../models/course.interface';
+import { Observable, Subscription } from 'rxjs';
 
 
 @Component({
@@ -18,16 +20,35 @@ import { PopUpCourse } from '../pop-up-course/pop-up-course.component';
 export class CourseComponent implements OnInit {
 
   ELEMENT_DATA = this.courseService.getCourse ();
-  displayedColumns: string[] = ['id', 'name', 'profesor','inscripcion',  'actions_edit', 'actions_delete'];
-  dataSource = new MatTableDataSource (this.ELEMENT_DATA)
 
+  displayedColumns: string[] = ['id', 'name', 'profesor','inscripcion',  'actions_edit', 'actions_delete'];
+  dataSource : MatTableDataSource<ICourse>
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private courseService: CourseService, private dialogRef: MatDialog) { }
+  course!: ICourse;
+  courses$!: Observable<ICourse[]>;
+  courses!: Array<ICourse>;
+  susCourses: Subscription;
+
+  constructor(private courseService: CourseService, private dialogRef: MatDialog) {
+
+    this.courses$ = this.courseService.getCourse();
+
+    this.susCourses = this.courses$.subscribe({
+      next: (courses: ICourse[]) => {this.courses = courses},
+      error: (error) => {console.error(error)},
+    });
+    this.dataSource = new MatTableDataSource<ICourse> (this.courses);
+
+   }
 
   ngOnInit(): void {
 
+  }
+
+  ngOnDestroy () {
+    this.susCourses.unsubscribe ();
   }
 
   editDialog(row: any) {

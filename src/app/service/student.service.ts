@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { IStudent } from '../models/student.interface';
 import { LIST_STUDENT } from '../mock/student.mock';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { ThisReceiver } from '@angular/compiler';
 
 // importamos la lista de contactos MO
 
@@ -9,32 +11,32 @@ import { LIST_STUDENT } from '../mock/student.mock';
 })
 export class StudentService {
 
-  constructor() { }
 
-  // Nos devuelve un listado de Contactos de la lista contact.mock.ts
-  getStudents (): IStudent[] {
-    return LIST_STUDENT; 
+  private students : BehaviorSubject<IStudent[]>
+
+  constructor() { 
+    this.students = new BehaviorSubject<IStudent[]> (LIST_STUDENT);
   }
 
-  // Nos devuelve un Contacto a partir de su ID de la lista contact.mock.ts
-  getStudentID (id: number): IStudent | undefined{
-
-    const student  = LIST_STUDENT.find ((student: IStudent) => student.id == id );
-
-    if ( student ) {
-      return student;
-    }
-    else {
-      return;
-    }
-  } 
-
-  deleteStudent ( index: number) {
-    LIST_STUDENT.splice (index, 1);
+  // Nos devuelve un listado de Estudiante de la lista 
+  getStudents (): Observable<IStudent[]> {
+    return this.students.asObservable();
   }
 
+  // Nos devuelve un Estudiante a partir de su ID de la lista
+  getStudentId (id:number) {
+    return  LIST_STUDENT[id-1];
+  }
+
+  // Agregar un Estudiante
   addStudent (student: IStudent) {
     LIST_STUDENT.unshift (student);
+    this.students.next (LIST_STUDENT);
+  }
+
+  deleteStudent ( id: number) {
+    LIST_STUDENT.splice (id, 1);
+    this.students.next (LIST_STUDENT);
   }
 
   lengthContact () : number {
@@ -42,13 +44,13 @@ export class StudentService {
   }
 
   editStudent (student: IStudent) {
-    let Index = LIST_STUDENT.findIndex ( (list=> list.id == student.id)  );
-    LIST_STUDENT[Index].id = student.id;
-    LIST_STUDENT[Index].first_name = student.first_name;
-    LIST_STUDENT[Index].last_name = student.last_name;
-    LIST_STUDENT[Index].email = student.email;
-    LIST_STUDENT[Index].group = student.group;
-    LIST_STUDENT[Index].gender = student.gender;
-}
+
+    let index = LIST_STUDENT.findIndex((studentOther: IStudent) => studentOther.id === student.id);
+
+    if (index > -1) {
+      LIST_STUDENT [index] = student;
+    }
+    this.students.next (LIST_STUDENT);
+  }
 
 }

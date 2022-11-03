@@ -3,8 +3,7 @@ import { StudentService } from '../../service/student.service';
 import { IStudent } from '../../models/student.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { PopUpStudentComponent } from '../pop-up-student/pop-up-student.component';
-import { from, interval, Observable, of } from 'rxjs';
-import { map, mergeMap } from 'rxjs/operators';
+import { interval, Observable, Subscription } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -14,16 +13,23 @@ import { MatSort } from '@angular/material/sort';
   styleUrls: ['./student.component.css']
 })
 
-//  <button mat-raised-button>Basic</button>
 
 export class StudentComponent implements OnInit {
 
   ELEMENT_DATA = this.studentService.getStudents ();
-  displayedColumns: string[] = ['id', 'avatar', 'first_name', 'email', 'group', 'gender', 'actions_edit', 'actions_delete'];
-  dataSource = new MatTableDataSource (this.ELEMENT_DATA);
 
+
+  displayedColumns: string[] = ['id', 'avatar', 'first_name', 'email', 'group', 'gender', 'actions_edit', 'actions_delete'];
+  dataSource : MatTableDataSource <IStudent>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  
+  student!: IStudent;
+  students$!: Observable<IStudent[]>;
+  students!: Array<IStudent>;
+  susStudents: Subscription;
+
+
   criteria = '';
 
   counterObservable = interval (1000);
@@ -31,28 +37,20 @@ export class StudentComponent implements OnInit {
   counter : number = 0;
 
   constructor(private studentService : StudentService, private dialogRef: MatDialog) { 
+    this.students$ = this.studentService.getStudents();
+
+    this.susStudents = this.students$.subscribe({
+      next: (students: IStudent[]) => {this.students = students},
+      error: (error) => {console.error(error)},
+    });
+    this.dataSource = new MatTableDataSource<IStudent> (this.students);
+
   }
-  //dataSource = this.contactService.getContacts ();
 
-  ngOnInit(): void {
+  ngOnInit(): void {  }
 
-    this.counterSub = this.counterObservable.subscribe ((value) => {
-      this.counter = value;
-    })
-
-    of (this.ELEMENT_DATA)
-      interval (2000).pipe (
-        map( (i) => i)
-      ).subscribe()
-
-      of (this.ELEMENT_DATA)
-      mergeMap(
-        (ELEMENT_DATA: IStudent[]) => from (this.ELEMENT_DATA).pipe(
-          map (
-            (curso: IStudent) => ELEMENT_DATA.filter (c => c.first_name === curso.first_name)
-          )
-        )
-      )
+  ngOnDestroy () {
+    this.susStudents.unsubscribe ();
   }
 
   openDialog () {
@@ -97,9 +95,5 @@ export class StudentComponent implements OnInit {
       resolve (this.studentService.lengthContact());
     }, 2000);
   });
-
-  unsubscribe () {
-    this.counterSub.unsubscribe ();
-  }
 
 }

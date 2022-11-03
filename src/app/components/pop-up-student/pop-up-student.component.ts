@@ -2,9 +2,7 @@ import { Component, OnInit, Output, EventEmitter, Inject } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, ValidatorFn, Validators } from '@angular/forms';
 import { StudentService } from 'src/app/service/student.service';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-
 import { IStudent } from '../../models/student.interface';
-
 @Component({
   selector: 'app-pop-up-student',
   templateUrl: './pop-up-student.component.html',
@@ -75,7 +73,9 @@ export class PopUpStudentComponent implements OnInit {
       group: this.form.value.group,
     }
    if (this.editData) {
+
     this.studentService.editStudent(student);
+    this.addStudentInGrid.emit (this.form.value);
    }
     else {
     this.studentService.addStudent(student);
@@ -90,8 +90,6 @@ export class PopUpStudentComponent implements OnInit {
 
     }
 
-
-  
   }
 
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
