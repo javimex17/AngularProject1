@@ -1,16 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {HttpClientModule} from '@angular/common/http'
+
+import { CommissionRoutingModule } from './commission-routing.module';
 
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    HttpClientModule
-  ],
-  exports: [
-    HttpClientModule
+    CommissionRoutingModule
   ]
 })
-export class SharedModule { }
+export class CommissionModule { }

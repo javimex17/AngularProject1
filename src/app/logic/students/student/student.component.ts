@@ -1,12 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { StudentService } from '../../service/student.service';
-import { IStudent } from '../../models/student.interface';
+import { StudentService } from '../services/student.service';
+import { IStudent } from '../../../models/student.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { PopUpStudentComponent } from '../pop-up-student/pop-up-student.component';
 import { interval, Observable, Subscription } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-student',
   templateUrl: './student.component.html',
@@ -17,7 +19,6 @@ import { MatSort } from '@angular/material/sort';
 export class StudentComponent implements OnInit {
 
   ELEMENT_DATA = this.studentService.getStudents ();
-
 
   displayedColumns: string[] = ['id', 'avatar', 'first_name', 'email', 'group', 'gender', 'actions_edit', 'actions_delete'];
   dataSource : MatTableDataSource <IStudent>;
@@ -36,7 +37,7 @@ export class StudentComponent implements OnInit {
   counterSub : any;
   counter : number = 0;
 
-  constructor(private studentService : StudentService, private dialogRef: MatDialog) { 
+  constructor(private studentService : StudentService, private dialogRef: MatDialog, private router: Router) { 
     this.students$ = this.studentService.getStudents();
 
     this.susStudents = this.students$.subscribe({
@@ -60,11 +61,13 @@ export class StudentComponent implements OnInit {
     });
   }
 
-  editDialog (row: any){
-    this.dialogRef.open (PopUpStudentComponent,
+  editDialog (id: number){
+
+    this.router.navigate (['logic/students/edit', {id: id}])
+  /*  this.dialogRef.open (PopUpStudentComponent,
       {
         data: row
-      })
+      })*/
   } 
 
   ngAfterViewInit () {
@@ -79,6 +82,7 @@ export class StudentComponent implements OnInit {
 
   deleteStudent (index: number) {
     this.studentService.deleteStudent(index);
+    this.students$ = this.studentService.getStudents();
     this.ngAfterViewInit();
   }
 

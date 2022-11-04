@@ -1,8 +1,10 @@
 import { Component, OnInit, Output, EventEmitter, Inject } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, ValidatorFn, Validators } from '@angular/forms';
-import { StudentService } from 'src/app/service/student.service';
+
+import { StudentService } from '../services/student.service';
+
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { IStudent } from '../../models/student.interface';
+import { IStudent } from '../../../models/student.interface';
 @Component({
   selector: 'app-pop-up-student',
   templateUrl: './pop-up-student.component.html',

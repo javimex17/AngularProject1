@@ -7,7 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 
 import { CourseService } from 'src/app/service/course.service';
 import { PopUpCourse } from '../pop-up-course/pop-up-course.component';
-import { ICourse } from '../../models/course.interface';
+import { ICourse } from '../../../models/course.interface';
 import { Observable, Subscription } from 'rxjs';
 
 

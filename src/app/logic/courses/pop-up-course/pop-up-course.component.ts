@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Inject } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, ValidatorFn, Validators } from '@angular/forms';
-import { CourseService } from '../../service/course.service';
-import { ICourse } from '../../models/course.interface';
+import { CourseService } from '../../../service/course.service';
+import { ICourse } from '../../../models/course.interface';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
