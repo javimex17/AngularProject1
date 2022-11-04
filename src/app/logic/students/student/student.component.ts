@@ -3,11 +3,12 @@ import { StudentService } from '../services/student.service';
 import { IStudent } from '../../../models/student.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { PopUpStudentComponent } from '../pop-up-student/pop-up-student.component';
-import { interval, Observable, Subscription } from 'rxjs';
+import { interval, merge, Observable, Subscription } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
+import { startWith, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-student',
@@ -21,7 +22,8 @@ export class StudentComponent implements OnInit {
   ELEMENT_DATA = this.studentService.getStudents ();
 
   displayedColumns: string[] = ['id', 'avatar', 'first_name', 'email', 'group', 'gender', 'actions_edit', 'actions_delete'];
-  dataSource : MatTableDataSource <IStudent>;
+  dataSource : any;
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   
@@ -29,7 +31,10 @@ export class StudentComponent implements OnInit {
   students$!: Observable<IStudent[]>;
   students!: Array<IStudent>;
   susStudents: Subscription;
+  isLoadingResults = true;
+  pagina: number = 0;
 
+  listStudent!: IStudent[];
 
   criteria = '';
 
@@ -40,15 +45,27 @@ export class StudentComponent implements OnInit {
   constructor(private studentService : StudentService, private dialogRef: MatDialog, private router: Router) { 
     this.students$ = this.studentService.getStudents();
 
+    this.getDataHttp();
+
     this.susStudents = this.students$.subscribe({
       next: (students: IStudent[]) => {this.students = students},
       error: (error) => {console.error(error)},
     });
-    this.dataSource = new MatTableDataSource<IStudent> (this.students);
+  //  this.dataSource = new MatTableDataSource<IStudent> (this.students);
 
   }
 
   ngOnInit(): void {  }
+
+
+  getDataHttp () {
+    this.studentService.getStudents().subscribe (data=> {
+      this.listStudent = data
+    this.dataSource = new MatTableDataSource(this.listStudent)
+    })
+
+  }
+
 
   ngOnDestroy () {
     this.susStudents.unsubscribe ();
@@ -73,6 +90,7 @@ export class StudentComponent implements OnInit {
   ngAfterViewInit () {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+
   }
 
   applyFilter(event: Event) {
