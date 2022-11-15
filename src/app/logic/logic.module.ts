@@ -3,8 +3,11 @@ import { CommonModule } from '@angular/common';
 import { LogicRoutingModule } from './logic-routing.module';
 
 
+
 @NgModule({
-  declarations: [],
+  declarations: [
+
+  ],
   imports: [
     CommonModule,
     LogicRoutingModule

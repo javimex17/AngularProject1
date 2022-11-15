@@ -57,7 +57,6 @@ export class StudentComponent implements OnInit {
 
   ngOnInit(): void {  }
 
-
   getDataHttp () {
     this.studentService.getStudents().subscribe (data=> {
       this.listStudent = data
@@ -65,7 +64,6 @@ export class StudentComponent implements OnInit {
     })
 
   }
-
 
   ngOnDestroy () {
     this.susStudents.unsubscribe ();
@@ -88,8 +86,8 @@ export class StudentComponent implements OnInit {
   } 
 
   ngAfterViewInit () {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+   // this.dataSource.paginator = this.paginator;
+   // this.dataSource.sort = this.sort;
 
   }
 

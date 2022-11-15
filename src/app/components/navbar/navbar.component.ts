@@ -1,5 +1,7 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
-import { throwToolbarMixedModesError } from '@angular/material/toolbar';
+import { SessionService } from '../../autentication/services/session.service';
+import { Session } from '../../autentication/models/session';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -7,16 +9,19 @@ import { throwToolbarMixedModesError } from '@angular/material/toolbar';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  session$!: Observable<Session>
 
+  
   //public componentStd : number = 0;
 
   @Output() messageEvent = new EventEmitter<number>()
   @Input() componentStd : number = 0;
 
 
-  constructor() { }
+  constructor(private sessionservice: SessionService) { }
 
   ngOnInit(): void {
+    this.session$ = this.sessionservice.getSession();
   }
 
   changeComponent (index: number) {

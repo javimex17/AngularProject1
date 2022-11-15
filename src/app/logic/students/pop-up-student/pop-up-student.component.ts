@@ -3,7 +3,7 @@ import { AbstractControl, FormBuilder, FormControl, ValidatorFn, Validators } fr
 
 import { StudentService } from '../services/student.service';
 
-import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { IStudent } from '../../../models/student.interface';
 @Component({
   selector: 'app-pop-up-student',
@@ -40,8 +40,8 @@ export class PopUpStudentComponent implements OnInit {
 
   constructor(private fb: FormBuilder, 
               private studentService : StudentService,
-              @Inject (MAT_DIALOG_DATA) public editData: any,
-              private dialogRef : MatDialogRef<PopUpStudentComponent>) { 
+              @Inject (MAT_DIALOG_DATA) public editData: any
+              ) { 
 
   }
 

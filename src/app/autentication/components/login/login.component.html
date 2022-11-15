@@ -1,1 +1,33 @@
-<p>login works!</p>
+
+<p>
+    <mat-toolbar>
+        <mat-icon>book</mat-icon>
+        <mat-label>Login</mat-label>
+    </mat-toolbar>
+</p>
+
+<mat-card style="margin-top: 10px; width: 350px">
+
+    <form [formGroup]="form" (ngSubmit)="login()">
+
+        <mat-form-field appearance="fill" style="width: 300px">
+            <mat-label>Usuario</mat-label>
+        <input matInput autocomplete="off" formControlName="user">                                                                                                                                                                                                                                                                                                                                                                                                                                               
+         </mat-form-field>
+     
+         <mat-form-field appearance="fill" style="width: 300px">
+             <mat-label>Password</mat-label>
+             <input matInput autocomplete="off" formControlName="password">
+          </mat-form-field>
+          
+          <mat-slide-toggle formControlName="admin">Inscripcion</mat-slide-toggle> 
+    
+          <button type="submit" mat-button>Entrar</button>
+
+    </form>
+
+</mat-card>
+
+
+
+
