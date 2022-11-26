@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { SessionService } from '../../services/session.service';
 import { Router } from '@angular/router';
+import { Session } from '../../models/session';
+
 
 @Component({
   selector: 'app-login',
@@ -24,12 +26,18 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+
+
   }
 
   login () {
-    this.session.login (this.form.value.User, this.form.value.pswd, this.form.value.admin);
+
+    this.session.login (this.form.value.user, this.form.value.password, this.form.value.admin);
     this.router.navigate(['students']);
 
   }
+
+
 
 }

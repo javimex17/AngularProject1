@@ -1,7 +1,8 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { SessionService } from '../../autentication/services/session.service';
 import { Session } from '../../autentication/models/session';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -10,15 +11,13 @@ import { Observable } from 'rxjs';
 })
 export class NavbarComponent implements OnInit {
   session$!: Observable<Session>
-
+  sessionSubject!: BehaviorSubject<Session>
   
-  //public componentStd : number = 0;
 
   @Output() messageEvent = new EventEmitter<number>()
   @Input() componentStd : number = 0;
 
-
-  constructor(private sessionservice: SessionService) { }
+  constructor(private sessionservice: SessionService, private router : Router) { }
 
   ngOnInit(): void {
     this.session$ = this.sessionservice.getSession();
@@ -26,7 +25,14 @@ export class NavbarComponent implements OnInit {
 
   changeComponent (index: number) {
       this.messageEvent.emit (index)
+  }
 
+
+  logOut () {
+    this.sessionservice.logOut();
+    this.router.navigate (['login']);
   }
 
 }
+
+

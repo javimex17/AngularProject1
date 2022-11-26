@@ -41,6 +41,7 @@ export class CourseComponent implements OnInit {
     });
     this.dataSource = new MatTableDataSource<ICourse> (this.courses);
 
+
    }
 
   ngOnInit(): void {

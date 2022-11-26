@@ -23,6 +23,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { GroupObsModule } from './group-obs/course-obs.module';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
+import { UserComponent } from './logic/users/user/user.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { SharedModule } from './shared/shared.module';
     NavbarComponent,
     ToolbarComponent,
     StudentComponent,
+    UserComponent,
     PopUpStudentComponent,
     ProjectStudentsComponent,
     CourseComponent,

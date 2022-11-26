@@ -5,6 +5,8 @@ import { CourseComponent } from './logic/courses/course/course.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { StudentComponent } from './logic/students/student/student.component';
 import { AutenticationGuard } from './core/guards/autentication.guard';
+import { UserComponent } from './logic/users/user/user.component';
+import { AdminGuardGuard } from './core/guards/admin-guard.guard';
 
 const routes: Routes = [
 
@@ -18,6 +20,9 @@ const routes: Routes = [
   { path: 'students', component: StudentComponent, canActivate: [AutenticationGuard]  },
   { path: 'courses', component: CourseComponent, canActivate: [AutenticationGuard]   },
   { path: 'commission', component: CommissionCourseComponent, canActivate: [AutenticationGuard] },
+  { path: 'users', component: UserComponent, canActivate: [AutenticationGuard, AdminGuardGuard] },
+
+
 
   { path: '', redirectTo: 'students', pathMatch: 'full'},
   { path: '**', component: PageNotFoundComponent }
