@@ -11,8 +11,36 @@
 
     </div>
 
-    <div class="box_toolbar_center">
+    <div class="box_toolbar_right">
 
+        <div class="boxImageCenter">
+            <span class="font-white">Session> </span>
+        </div>
+        <div class="boxImageCenter">
+            <span class="font-white">{{sessions.activeSession}}</span>
+        </div>
+
+        <div class="boxImageCenter">
+            <span class="font-white">User></span>
+        </div>
+        <div class="boxImageCenter">
+            <span class="font-white">{{sessions.activeUser?.name}}</span>
+        </div>
+
+        <div class="boxImageCenter">
+            <span class="font-white">Admin></span>
+        </div>
+        <div class="boxImageCenter">
+            <span class="font-white">{{sessions.activeUser?.admin}}</span>
+        </div>
+
+        <div class="boxImageCenter">
+            <span class="font-white">Route></span>
+        </div>
+        <div class="boxImageCenter">
+            <span class="font-white">{{sessions.activeRoute}}</span>
+        </div>
+     
     </div>
 
     <div class="box_toolbar_right">

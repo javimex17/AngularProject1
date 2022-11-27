@@ -1,31 +1,35 @@
 <div class="navbar">
 
 
-    <h3>{{session$ | async | json}}</h3>  
+   <!-- <h3>{{session$ | async | json}}</h3> 
+
+    <h3>{{sessions.activeSession}}</h3>
+    <h3>{{sessions.activeUser?.name}}</h3>
+     -->
+
     <div class="nav_button">
         <span class="font-white pointer" (click)="changeComponent(0)">Inicio</span>
     </div>
 
     <div class="nav_button">
-        <span class="font-white pointer" routerLink="/students">Estudiantes</span>
+        <span class="font-white pointer" (click)="setRoute('Students')" routerLink="/students">Estudiantes</span>
     </div>
 
     <div class="nav_button">
-        <span class="font-white pointer" routerLink="/courses">Cursos</span>
+        <span class="font-white pointer" (click)="setRoute('Courses')" routerLink="/courses">Cursos</span>
     </div>
 
     <div class="nav_button">
-        <span class="font-white pointer" routerLink="/commission">Comisiones</span>
+        <span class="font-white pointer" (click)="setRoute('Commission')" routerLink="/commission">Comisiones</span>
     </div>
 
     <div class="nav_button">
-        <span class="font-white pointer" routerLink="/groups">Listado Cursos</span>
+        <span class="font-white pointer" (click)="setRoute('Groups')" routerLink="/groups">Listado Cursos</span>
     </div>
 
     <div class="nav_button">
-        <span class="font-white pointer" routerLink="/users">Usuarios</span>
+        <span class="font-white pointer" (click)="setRoute('Users')" routerLink="/users">Usuarios</span>
     </div>
-
 
     <div class="nav_button">
         <span class="font-white pointer" routerLink="/login">Login</span>

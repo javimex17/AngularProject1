@@ -19,7 +19,6 @@ export class SessionService {
     const session: Session = {
       activeSession: false
     } 
-    
     this.sessionSubject   = new BehaviorSubject (session)
 
    }
@@ -42,7 +41,8 @@ export class SessionService {
           name: user,
           password: pswd,
           admin: admin
-        }
+        },
+        activeRoute: 'Login'
       }
   
       this.sessionSubject.next (session);
@@ -61,13 +61,23 @@ export class SessionService {
 
   logOut () {
     const session: Session = {
-      activeSession: false
+      activeSession: false,
+      activeRoute: 'LogOut'
+
     }
 
     this.sessionSubject.next (session);
 
-
-
   }
+
+  setRouteSession (route: string) {
+    const session: Session = {
+      activeSession: true,
+      activeRoute: route
+    }
+
+    this.sessionSubject.next (session);
+  }
+
 
 }

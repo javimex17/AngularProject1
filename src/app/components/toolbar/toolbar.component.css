@@ -27,10 +27,12 @@
 }
 
 .boxImageCenter{
+    width: 200px;
     display: flex;
-    flex-flow: column wrap;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
+    padding: 5px;
+    margin-right: 5px;
 }
 
 img {
@@ -66,4 +68,12 @@ img {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.font-white {
+    color: white;
+    font-size: 14px;
+    font-family: 'Nunito', sans-serif;
+    line-height: 1.71;
+    letter-spacing: normal;
 }
