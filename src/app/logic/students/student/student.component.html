@@ -3,19 +3,11 @@
         <mat-icon>book</mat-icon>
         <mat-label>Student</mat-label>
         <button mat-raised-button color="primary" (click)="openDialog()">Añadir</button>
-      
-      <!--
-      <mat-form-field appearance="standard">
-        <mat-label>Filtro Nombre</mat-label>
-        <input matInput [(ngModel)]="criteria" placeholder="Filtro" #input autocomplite="off">
-      </mat-form-field>
-
-      -->
-
     </mat-toolbar>
   </p>
 
-
+ 
+  <h3>{{students$ | async | json}}</h3> 
 
 
 <mat-card>
@@ -27,7 +19,7 @@
 
     <div class="mat-elevation-z8">
 
-        <table mat-table [dataSource]="students$" matSort>
+        <table mat-table [dataSource]="dataSource" matSort>
 
             <ng-container matColumnDef="id">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> ID. </th>

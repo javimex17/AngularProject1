@@ -45,13 +45,15 @@ export class StudentComponent implements OnInit {
   constructor(private studentService : StudentService, private dialogRef: MatDialog, private router: Router) { 
     this.students$ = this.studentService.getStudents();
 
-    this.getDataHttp();
+    //this.getDataHttp();
 
     this.susStudents = this.students$.subscribe({
       next: (students: IStudent[]) => {this.students = students},
       error: (error) => {console.error(error)},
     });
-  //  this.dataSource = new MatTableDataSource<IStudent> (this.students);
+
+    
+    this.dataSource = new MatTableDataSource<IStudent> (this.students);
 
   }
 
@@ -60,7 +62,7 @@ export class StudentComponent implements OnInit {
   getDataHttp () {
     this.studentService.getStudents().subscribe (data=> {
       this.listStudent = data
-    this.dataSource = new MatTableDataSource(this.listStudent)
+   // this.dataSource = new MatTableDataSource(this.listStudent)
     })
 
   }
@@ -77,17 +79,19 @@ export class StudentComponent implements OnInit {
   }
 
   editDialog (id: number){
-
+/*
     this.router.navigate (['logic/students/edit', {id: id}])
-  /*  this.dialogRef.open (PopUpStudentComponent,
+    this.dialogRef.open (PopUpStudentComponent,
       {
         data: row
-      })*/
+      })
+
+      */
   } 
 
   ngAfterViewInit () {
-   // this.dataSource.paginator = this.paginator;
-   // this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
 
   }
 
