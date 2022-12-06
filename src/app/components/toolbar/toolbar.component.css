@@ -1,7 +1,4 @@
 
-
-
-
 .center_ico_white {
     color: white;
     text-decoration: none;
@@ -15,19 +12,19 @@
 }
 
 .box_toolbar_center {
-    width: 40%;
+    width: 10%;
     height: 60px;
 }
 
 .box_toolbar_right {
-    width: 10%;
+    width: 30%;
     height: 60px;
     display: flex;
     justify-content: space-around;
 }
 
 .boxImageCenter{
-    width: 200px;
+    width: 10%;
     display: flex;
     justify-content: space-around;
     align-items: center;

@@ -12,23 +12,23 @@
     </div>
 
     <div class="nav_button">
-        <span class="font-white pointer" (click)="setRoute('Students')" routerLink="/students">Estudiantes</span>
+        <span *ngIf="sessions.activeSession" class="font-white pointer" (click)="setRoute('Students')" routerLink="/students">Estudiantes</span>
     </div>
 
     <div class="nav_button">
-        <span class="font-white pointer" (click)="setRoute('Courses')" routerLink="/courses">Cursos</span>
+        <span *ngIf="sessions.activeSession" class="font-white pointer" (click)="setRoute('Courses')" routerLink="/courses">Cursos</span>
     </div>
 
     <div class="nav_button">
-        <span class="font-white pointer" (click)="setRoute('Commission')" routerLink="/commission">Comisiones</span>
+        <span *ngIf="sessions.activeSession" class="font-white pointer" (click)="setRoute('Commission')" routerLink="/commission">Comisiones</span>
     </div>
 
     <div class="nav_button">
-        <span class="font-white pointer" (click)="setRoute('Groups')" routerLink="/groups">Listado Cursos</span>
+        <span *ngIf="sessions.activeSession" class="font-white pointer" (click)="setRoute('Groups')" routerLink="/groups">Listado Cursos</span>
     </div>
 
     <div class="nav_button">
-        <span class="font-white pointer" (click)="setRoute('Users')" routerLink="/users">Usuarios</span>
+        <span *ngIf="sessions.activeSession" class="font-white pointer" (click)="setRoute('Users')" routerLink="/users">Usuarios</span>
     </div>
 
     <div class="nav_button">

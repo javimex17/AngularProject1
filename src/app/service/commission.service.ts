@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { LIST_COMMISSION } from '../mock/commission.mock';
 import { ICommission } from '../models/commission.interface';
 
@@ -7,32 +8,30 @@ import { ICommission } from '../models/commission.interface';
 })
 export class ClassGroupService {
 
-  constructor() { }
+  private commission: BehaviorSubject<ICommission[]>;
+
+  constructor() { 
+    this.commission = new BehaviorSubject<ICommission[]>(LIST_COMMISSION)
+  }
 
   // Nos devuelve un listado 
-  getClassGroups (): ICommission[] {
-    return LIST_COMMISSION; 
+  getCommission (): Observable<ICommission[]> {
+    return this.commission.asObservable();
   }
 
   // Nos registro un Contacto a partir de su ID
-  getClassGroupID (id: number): ICommission | undefined{
-
-    const commission  = LIST_COMMISSION.find ((contact: ICommission) => contact.id == id );
-
-    if ( commission ) {
-      return commission;
-    }
-    else {
-      return;
-    }
+  getCommissionID (id: number) {
+    return this.commission.asObservable();
   } 
 
-  deleteClassGroup ( index: number) {
+  deleteCommission ( index: number) {
     LIST_COMMISSION.splice (index, 1);
+    this.commission.next (LIST_COMMISSION);
   }
 
   addClassGroup (commission: ICommission) {
     LIST_COMMISSION.unshift (commission);
+    this.commission.next (LIST_COMMISSION);
   }
 
   editGroup (commission: ICommission) {
@@ -62,5 +61,13 @@ export class ClassGroupService {
     LIST_COMMISSION [Index].fechaFin = commission.fechaFin;
 
   }
+
+  addStudentCommission (indexCommission : number, student : number) {
+
+        
+
+
+  }
+
 
 }

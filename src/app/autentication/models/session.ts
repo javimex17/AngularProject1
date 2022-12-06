@@ -1,7 +1,7 @@
 import { User } from "./user";
 
 export interface Session {
-    activeSession: boolean;
+    activeSession?: boolean;
     activeUser?  : User;
     activeRoute? : string;
 }

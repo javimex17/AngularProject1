@@ -10,6 +10,8 @@ import { PopUpCourse } from '../pop-up-course/pop-up-course.component';
 import { ICourse } from '../../../models/course.interface';
 import { Observable, Subscription } from 'rxjs';
 
+import { AdminGuardGuard } from 'src/app/core/guards/admin-guard.guard';
+
 
 @Component({
   selector: 'app-course',
@@ -40,20 +42,24 @@ export class CourseComponent implements OnInit {
       error: (error) => {console.error(error)},
     });
     this.dataSource = new MatTableDataSource<ICourse> (this.courses);
-
-
    }
 
   ngOnInit(): void {
 
   }
 
+
   ngOnDestroy () {
     this.susCourses.unsubscribe ();
   }
 
   editDialog(row: any) {
-    this.dialogRef.open(PopUpCourse, { data: row })
+
+    let ref = this.dialogRef.open(PopUpCourse, { data: row })
+    ref.afterClosed().toPromise().then(() => {
+       this.ngAfterViewInit();
+    });
+
   }
 
   openDialog() {

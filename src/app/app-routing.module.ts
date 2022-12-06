@@ -10,7 +10,6 @@ import { AdminGuardGuard } from './core/guards/admin-guard.guard';
 
 const routes: Routes = [
 
-
   {
     path: 'logic',
     loadChildren: () =>
@@ -19,8 +18,8 @@ const routes: Routes = [
 
   { path: 'students', component: StudentComponent, canActivate: [AutenticationGuard]  },
   { path: 'courses', component: CourseComponent, canActivate: [AutenticationGuard]   },
-  { path: 'commission', component: CommissionCourseComponent, canActivate: [AutenticationGuard] },
-  { path: 'users', component: UserComponent, canActivate: [AutenticationGuard, AdminGuardGuard] },
+  { path: 'commission', component: CommissionCourseComponent, canActivate: [AutenticationGuard]},
+  { path: 'users', component: UserComponent  , canActivate: [AutenticationGuard, AdminGuardGuard]},
 
 
 

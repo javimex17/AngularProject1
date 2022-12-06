@@ -10,11 +10,10 @@ import { ClassGroupService } from 'src/app/service/commission.service';
   styleUrls: ['./pop-up-commission.component.css']
 })
 export class PopUpCommissionComponent implements OnInit {
+  
   actionBtn : string= "Save";
 
-
   @Output() addGroupInGrid: EventEmitter<any> = new EventEmitter<any>();
-
 
   form = this.fb.group ({
     id: ['', [Validators.required, Validators.min(0)]],
@@ -34,6 +33,7 @@ export class PopUpCommissionComponent implements OnInit {
 
   ngOnInit(): void {
 
+
     if (this.editData) {
 
       this.actionBtn = 'Update',
@@ -41,8 +41,8 @@ export class PopUpCommissionComponent implements OnInit {
         this.form.controls ['id'].setValue (this.editData.id);
         this.form.controls ['idGroup'].setValue (this.editData.idGroup);
         this.form.controls ['name'].setValue (this.editData.name);
-        this.form.controls ['fechaInicio'].setValue (this.editData.fechaInicio);
-        this.form.controls ['fechaFin'].setValue (this.editData.fechaFin);
+        this.form.controls ['fechaInicio'].setValue ((this.editData.fechaInicio));
+        this.form.controls ['fechaFin'].setValue (new Date (this.editData.fechaFin));
 
     }
 
@@ -54,13 +54,17 @@ export class PopUpCommissionComponent implements OnInit {
       id: this.form.value.id,
       idGroup: this.form.value.idGroup,
       name: this.form.value.name,
-      subscriptions: undefined,
-      idCourse: undefined,
       fechaInicio: this.form.value.fechaInicio,
       fechaFin: this.form.value.fechaFin
     }
 
-    this.classGroupService.addClassGroup(group);
+    if (this.editData) {
+      this.classGroupService.editGroup(group);
+    }
+    else {
+      this.classGroupService.addClassGroup(group);
+    }
+
     this.addGroupInGrid.emit (this.form.value);
   }
 

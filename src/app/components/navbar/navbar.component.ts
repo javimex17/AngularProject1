@@ -22,7 +22,13 @@ export class NavbarComponent implements OnInit {
   constructor(private sessionservice: SessionService, private router : Router) { }
 
   ngOnInit(): void {
+
     this.session$ = this.sessionservice.getSession();
+
+    this.susSession = this.session$.subscribe({
+      next: (sessions: Session) => {this.sessions = sessions},
+      error: (error) => {console.error(error)},
+    });
 
   }
 
@@ -32,9 +38,9 @@ export class NavbarComponent implements OnInit {
 
   setRoute (route : string) {
     this.sessionservice.setRouteSession (route);
+    
+
   }
-
-
 
   logOut () {
     this.sessionservice.logOut();

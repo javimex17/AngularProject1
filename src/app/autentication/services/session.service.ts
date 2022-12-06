@@ -14,6 +14,10 @@ export class SessionService {
   susUserLogin!: Subscription;
   userLogin!: Array<IUser>;
 
+  userGlobal!: string;
+  pswdGlobal!: string;
+  adminGlobal!: boolean;
+
   constructor(private userService : UserService) {
 
     const session: Session = {
@@ -26,6 +30,10 @@ export class SessionService {
   login (user: string, pswd: string, admin: boolean) {
 
     this.loginTrue$ = this.userService.getUserLogin ( user, pswd, admin ); 
+
+    this.userGlobal = user;
+    this.pswdGlobal = pswd;
+    this.adminGlobal = admin;
 
 
     this.susUserLogin = this.loginTrue$.subscribe({
@@ -63,21 +71,22 @@ export class SessionService {
     const session: Session = {
       activeSession: false,
       activeRoute: 'LogOut'
-
     }
-
     this.sessionSubject.next (session);
-
   }
 
   setRouteSession (route: string) {
     const session: Session = {
+      activeUser : {
+        name: this.userGlobal,
+        password: this.pswdGlobal,
+        admin: this.adminGlobal
+      },
       activeSession: true,
       activeRoute: route
     }
 
     this.sessionSubject.next (session);
   }
-
 
 }

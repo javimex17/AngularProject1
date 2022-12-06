@@ -23,11 +23,14 @@ export class AdminGuardGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       return this.session.getSession().pipe (
         map((session: Session) => {
+
+         //   alert ('admin : '+session.activeUser?.admin);
+
           if (session.activeUser?.admin) {
             return true;
           } else {
             alert ("No tiene permiso para acceder")
-            this.router.navigate (['login'])
+          //  this.router.navigate (['login'])
             return false;
           }
         })

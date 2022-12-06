@@ -4,7 +4,7 @@ export interface ICommission {
     id: number;
     idGroup: number;
     name: string;
-    idCourse: ICourse | undefined;
+    idCourse?: ICourse | undefined;
     subscriptions?: IStudent []  | undefined;
     fechaInicio: Date;
     fechaFin: Date;

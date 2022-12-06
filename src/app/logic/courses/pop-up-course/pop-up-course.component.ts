@@ -15,7 +15,6 @@ export class PopUpCourse implements OnInit {
 
   @Output() addGroupInGrid: EventEmitter<any> = new EventEmitter<any>();
 
-
   form = this.fb.group ({
     id: ['', [Validators.required, Validators.min(0)]],
     name: ['', [Validators.required]],

@@ -125,5 +125,10 @@
       }
     }
   },
-  "defaultProject": "angularCoder"
+  "defaultProject": "angularCoder",
+  "cli": {
+    "schematicCollections": [
+      "@ngrx/schematics"
+    ]
+  }
 }
