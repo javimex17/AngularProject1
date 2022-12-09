@@ -2,6 +2,19 @@
 
 
 
+
+
+<p>
+    <mat-toolbar>
+
+
+
+        <mat-icon>book</mat-icon>
+        <mat-label>Commission</mat-label>
+        <button mat-raised-button color="primary" (click)="openDialog()">Añadir</button>
+    </mat-toolbar>
+</p>
+
 <mat-card>
 
     <mat-form-field appearance="standard">
@@ -65,6 +78,9 @@
     </div>
 
 </mat-card>
+
+
+<br>
 
 <!--
 
@@ -146,7 +162,7 @@
                     {{item.name}}
                 </mat-panel-title>
                 <mat-panel-description>
-                Profesor {{item.idCourse?.profesor!}}
+                Profesor {{item.idCourse?.profesor}}
                 <mat-icon>assignment</mat-icon>
                 </mat-panel-description>
             </mat-expansion-panel-header>

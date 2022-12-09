@@ -113,18 +113,13 @@ export class StudentComponent implements OnInit, OnDestroy {
     });
 
     this.resultsLength = this.dataSource.data.length;
-
     this.store.dispatch (loadStudents());
-
-
-
 
     this.susStudentsStore = this.studentService.getStudents().subscribe ((students: IStudent[]) => {
         this.store.dispatch (loadStudentsSuccess ({students}));
     });
 
     this.students$ = this.store.select (selectStateStudents);
-
 
 
     }

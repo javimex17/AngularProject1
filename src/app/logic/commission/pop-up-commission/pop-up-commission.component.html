@@ -23,12 +23,21 @@
                     </mat-error>
                 </mat-form-field>
 
+
+
+
                 <mat-form-field appearance="fill" style="width: 300px">
                     <mat-label>Nombre</mat-label>
                     <input matInput autocomplete="off" formControlName="name">
                     <mat-error *ngIf="this.form.controls.name.hasError('required')">
                         Este campo es requerido
                     </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="fill">
+                    <mat-select id="inputCursos" formControlName="idCourse">
+                        <mat-option *ngFor="let curso of courses$ | async" [value]="curso">{{curso.name}}</mat-option>
+                    </mat-select>
                 </mat-form-field>
 
                 <mat-form-field appearance="fill">
