@@ -10,9 +10,6 @@ import { PopUpCourse } from '../pop-up-course/pop-up-course.component';
 import { ICourse } from '../../../models/course.interface';
 import { Observable, Subscription } from 'rxjs';
 
-import { AdminGuardGuard } from 'src/app/core/guards/admin-guard.guard';
-
-
 @Component({
   selector: 'app-course',
   templateUrl: './course.component.html',

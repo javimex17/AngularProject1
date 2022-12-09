@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { StudentService } from '../services/student.service';
 import { IStudent } from '../../../models/student.interface';
 import { MatDialog } from '@angular/material/dialog';
@@ -8,11 +8,14 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
-import { startWith, switchMap } from 'rxjs/operators';
-
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { ICommission } from 'src/app/models/commission.interface';
 import { ClassGroupService } from 'src/app/service/commission.service';
+import { StudentState } from 'src/app/models/student.state';
+import { Store } from '@ngrx/store';
+import { loadStudents, loadStudentsSuccess } from '../state/students.actions';
+import { selectStateStudents } from '../state/students.selectors';
+
 
 @Component({
   selector: 'app-student',
@@ -28,7 +31,7 @@ import { ClassGroupService } from 'src/app/service/commission.service';
 })
 
 
-export class StudentComponent implements OnInit {
+export class StudentComponent implements OnInit, OnDestroy {
 
   ELEMENT_DATA = this.studentService.getStudents ();
   displayedColumns: string[] = ['id', 'first_name', 'email', 'group', 'gender', 'actions_edit', 'actions_delete'];
@@ -53,6 +56,8 @@ export class StudentComponent implements OnInit {
   commissions!: Array<ICommission>;
   susCommission: Subscription;
 
+  susStudentsStore! : Subscription;
+
   resultsLength = 0;
 
   listStudent!: IStudent[];
@@ -65,7 +70,12 @@ export class StudentComponent implements OnInit {
   counterSub : any;
   counter : number = 0;
 
-  constructor(private studentService : StudentService, private commissionService : ClassGroupService, private dialogRef: MatDialog, private router: Router) { 
+  constructor(
+    private studentService : StudentService, 
+    private commissionService : ClassGroupService, 
+    private dialogRef: MatDialog, private router: Router,
+    private store: Store<StudentState>
+    ) { 
     this.students$ = this.studentService.getStudents();
 
     //this.getDataHttp();
@@ -104,6 +114,18 @@ export class StudentComponent implements OnInit {
 
     this.resultsLength = this.dataSource.data.length;
 
+    this.store.dispatch (loadStudents());
+
+
+
+
+    this.susStudentsStore = this.studentService.getStudents().subscribe ((students: IStudent[]) => {
+        this.store.dispatch (loadStudentsSuccess ({students}));
+    });
+
+    this.students$ = this.store.select (selectStateStudents);
+
+
 
     }
 
@@ -112,11 +134,6 @@ export class StudentComponent implements OnInit {
     //  alert ("element"+id);
 
       const studentID = this.studentService.getStudentCommissionLocalId (idStudent, idCommission);
-
-
-
-
-      
 
     }
 
@@ -130,8 +147,11 @@ export class StudentComponent implements OnInit {
 
   }
 */
+
   ngOnDestroy () {
     this.susStudents.unsubscribe ();
+
+    this.susStudentsStore.unsubscribe ();
   }
 
   openDialog () {

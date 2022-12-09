@@ -19,7 +19,7 @@ describe('GroupComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('Componente creado...', () => {
     expect(component).toBeTruthy();
   });
 });
