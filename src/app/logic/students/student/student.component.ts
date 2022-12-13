@@ -157,14 +157,15 @@ export class StudentComponent implements OnInit, OnDestroy {
   }
 
   editDialog (id: number){
-/*
+
+    /*
     this.router.navigate (['logic/students/edit', {id: id}])
     this.dialogRef.open (PopUpStudentComponent,
       {
         data: row
       })
-
-      */
+*/
+      
   } 
 
   ngAfterViewInit () {
