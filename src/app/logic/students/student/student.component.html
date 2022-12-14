@@ -158,10 +158,13 @@
               </div>
             </mat-card-content>
 
+
+            <span *ngIf="sessions.activeUser?.admin">
               <mat-card-actions>
                 <td mat-cell> <button mat-raised-button color="primary" (click)="editDialog(element.id)">Editar estudiante</button> </td>
                 <td mat-cell> <button mat-raised-button color="warn" (click)="deleteStudent(element.id)">Eliminar estudiante</button> </td>
               </mat-card-actions>
+            </span>
 
           </mat-card>
 

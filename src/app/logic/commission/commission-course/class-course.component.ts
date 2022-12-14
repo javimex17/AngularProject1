@@ -4,11 +4,13 @@ import { MatAccordion } from '@angular/material/expansion';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { ICommission } from 'src/app/models/commission.interface';
 import { ClassGroupService } from 'src/app/service/commission.service';
 
 import { PopUpCommissionComponent } from '../pop-up-commission/pop-up-commission.component';
+import { Session } from 'src/app/autentication/models/session';
+import { SessionService } from 'src/app/autentication/services/session.service';
 @Component({
   selector: 'app-class-course',
   templateUrl: './class-course.component.html',
@@ -25,13 +27,18 @@ export class CommissionCourseComponent implements OnInit {
 
   @ViewChild(MatAccordion) accordion: MatAccordion | undefined;
 
+  session$!: Observable<Session>
+  sessionSubject!: BehaviorSubject<Session>
+  susSession!: Subscription;
+  sessions!: Session;
+
   commission!: ICommission;
   commissions$!: Observable<ICommission[]>;
   commissions!: Array<ICommission>;
   susCommission: Subscription;
 
 
-  constructor(private commissionService : ClassGroupService, private dialogRef: MatDialog) {
+  constructor(private commissionService : ClassGroupService, private dialogRef: MatDialog, private sessionservice: SessionService) {
 
     this.commissions$ = this.commissionService.getCommission();
 
@@ -44,6 +51,14 @@ export class CommissionCourseComponent implements OnInit {
    }
 
   ngOnInit(): void {
+
+    this.session$ = this.sessionservice.getSession();
+
+    this.susSession = this.session$.subscribe({
+      next: (sessions: Session) => {this.sessions = sessions},
+      error: (error) => {console.error(error)},
+    });
+
   }
 
 

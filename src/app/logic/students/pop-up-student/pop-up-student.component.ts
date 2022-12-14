@@ -52,7 +52,7 @@ export class PopUpStudentComponent implements OnInit {
 
         this.actionBtn = 'Update',
 
-        console.log("this.editData",this.editData);
+
           this.form.controls ['id'].setValue (this.editData.id);
           this.form.controls ['first_name'].setValue (this.editData.first_name);
           this.form.controls ['last_name'].setValue (this.editData.last_name);

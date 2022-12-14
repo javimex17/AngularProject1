@@ -3,7 +3,7 @@ import { StudentService } from '../services/student.service';
 import { IStudent } from '../../../models/student.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { PopUpStudentComponent } from '../pop-up-student/pop-up-student.component';
-import { interval, merge, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, interval, merge, Observable, Subscription } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -15,6 +15,8 @@ import { StudentState } from 'src/app/models/student.state';
 import { Store } from '@ngrx/store';
 import { loadStudents, loadStudentsSuccess } from '../state/students.actions';
 import { selectStateStudents } from '../state/students.selectors';
+import { SessionService } from 'src/app/autentication/services/session.service';
+import { Session } from 'src/app/autentication/models/session';
 
 
 @Component({
@@ -44,10 +46,17 @@ export class StudentComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   
+  session$!: Observable<Session>
+  sessionSubject!: BehaviorSubject<Session>
+  susSession!: Subscription;
+  sessions!: Session;
+
+
   student!: IStudent;
   students$!: Observable<IStudent[]>;
   students!: Array<IStudent>;
   susStudents: Subscription;
+  
   isLoadingResults = true;
   pagina: number = 0;
 
@@ -74,7 +83,8 @@ export class StudentComponent implements OnInit, OnDestroy {
     private studentService : StudentService, 
     private commissionService : ClassGroupService, 
     private dialogRef: MatDialog, private router: Router,
-    private store: Store<StudentState>
+    private store: Store<StudentState>,
+    private sessionservice: SessionService
     ) { 
     this.students$ = this.studentService.getStudents();
 
@@ -100,6 +110,13 @@ export class StudentComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
+    this.session$ = this.sessionservice.getSession();
+
+    this.susSession = this.session$.subscribe({
+      next: (sessions: Session) => {this.sessions = sessions},
+      error: (error) => {console.error(error)},
+    });
 
     this.students$ = this.studentService.getStudents();
     this.suscription = this.students$.subscribe({

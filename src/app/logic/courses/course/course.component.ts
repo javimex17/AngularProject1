@@ -8,7 +8,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { CourseService } from 'src/app/service/course.service';
 import { PopUpCourse } from '../pop-up-course/pop-up-course.component';
 import { ICourse } from '../../../models/course.interface';
-import { Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+
+import { Session } from 'src/app/autentication/models/session';
+import { SessionService } from 'src/app/autentication/services/session.service';
 
 @Component({
   selector: 'app-course',
@@ -25,12 +28,18 @@ export class CourseComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
+  session$!: Observable<Session>
+  sessionSubject!: BehaviorSubject<Session>
+  susSession!: Subscription;
+  sessions!: Session;
+
+
   course!: ICourse;
   courses$!: Observable<ICourse[]>;
   courses!: Array<ICourse>;
   susCourses: Subscription;
 
-  constructor(private courseService: CourseService, private dialogRef: MatDialog) {
+  constructor(private courseService: CourseService, private dialogRef: MatDialog, private sessionservice: SessionService) {
 
     this.courses$ = this.courseService.getCourse();
 
@@ -42,6 +51,13 @@ export class CourseComponent implements OnInit {
    }
 
   ngOnInit(): void {
+
+    this.session$ = this.sessionservice.getSession();
+
+    this.susSession = this.session$.subscribe({
+      next: (sessions: Session) => {this.sessions = sessions},
+      error: (error) => {console.error(error)},
+    });
 
   }
 

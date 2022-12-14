@@ -126,7 +126,7 @@ export class StudentService {
     }).pipe (
       catchError (this.errorhttp)
 
-    ).subscribe(console.log)
+    ).subscribe()
   }
 
   deleteStudent ( id: number) {
@@ -134,7 +134,7 @@ export class StudentService {
     this.http.delete<IStudent> (`${environment.api}/student/${id}`,{}).pipe (
       catchError (this.errorhttp)
   
-    ).subscribe (console.log);
+    ).subscribe ();
   
    // this.students.next (LIST_STUDENT);
   }
@@ -148,7 +148,7 @@ export class StudentService {
     this.http.put<IStudent> (`${environment.api}/student/${student.id}`, student).pipe (
       catchError (this.errorhttp)
   
-    ).subscribe (console.log);
+    ).subscribe ();
     
   }
 

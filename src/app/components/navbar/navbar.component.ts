@@ -37,9 +37,9 @@ export class NavbarComponent implements OnInit {
   }
 
   setRoute (route : string) {
+
     this.sessionservice.setRouteSession (route);
     
-
   }
 
   logOut () {
